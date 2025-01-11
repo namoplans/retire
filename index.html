@@ -19,11 +19,11 @@
             text-align: center;
         }
         h1 {
-            font-size: 4.5em;
-            margin-bottom: 20px;
+            font-size: 3.5em;
+            margin-bottom: 50px;
         }
         .timer {
-            font-size: 5em;
+            font-size: 4em;
             font-weight: bold;
             color: #222;
         }
@@ -48,15 +48,16 @@
                 const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-                document.getElementById('timer').innerText = `${days} days ${hours} hrs ${minutes} mins`;
+                document.getElementById('timer').innerText = `${days} days ${hours} hrs ${minutes} mins ${seconds} secs`;
             } else {
                 document.getElementById('timer').innerText = 'The day has arrived!';
             }
         }
 
-        // Update countdown every minute
-        setInterval(updateCountdown, 60000);
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
         updateCountdown(); // Initial call
     </script>
 </body>
