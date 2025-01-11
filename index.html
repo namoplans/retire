@@ -43,16 +43,17 @@
             flex: 1 1 calc(50% - 20px);
             max-width: 200px;
             position: relative;
+            overflow: hidden;
         }
         .label {
-            font-size: 0.5em;
-            margin-top: 5px;
+            font-size: 0.4em;
             color: #ddd;
             position: absolute;
             bottom: 5px;
             width: 100%;
             text-align: center;
         }
+
         .image-container {
             margin-bottom: 20px;
         }
@@ -72,7 +73,7 @@
                 padding: 15px 10px;
             }
             .label {
-                font-size: 0.6em; /* Slightly larger labels on smaller screens */
+                font-size: 0.5em; /* Adjust for medium screens */
             }
         }
 
@@ -85,7 +86,7 @@
                 padding: 10px 5px;
             }
             .label {
-                font-size: 0.7em; /* Ensure readability on very small screens */
+                font-size: 0.6em; /* Adjust for small screens */
             }
         }
     </style>
@@ -93,7 +94,7 @@
 <body>
     <div class="countdown">
         <div class="image-container">
-            <img src="svb92f5_pm-modi-lk-advani-pti_625x300_04_April_19.webp" alt="Supreme Leaders Image">
+            <img src="svb92f5_pm-modi-lk-advani-pti_625x300_04_April_19.webp" alt="Leaders Image">
         </div>
         <h1>Retiring in:</h1>
         <div class="timer" id="timer">
