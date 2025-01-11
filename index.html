@@ -17,22 +17,80 @@
         }
         .countdown {
             text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
         h1 {
-            font-size: 3.5em;
-            margin-bottom: 50px;
+            font-size: 3em;
+            margin-bottom: 20px;
         }
         .timer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .timer div {
+            background: #222;
+            color: #fff;
             font-size: 4em;
             font-weight: bold;
-            color: #222;
+            border-radius: 10px;
+            padding: 20px 15px;
+            text-align: center;
+            min-width: 100px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            flex: 1 1 calc(50% - 20px);
+            max-width: 200px;
+        }
+        .label {
+            font-size: 1em;
+            margin-top: 5px;
+            color: #ddd;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .timer div {
+                font-size: 3em;
+                padding: 15px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+            .timer div {
+                font-size: 2em;
+                padding: 10px 5px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="countdown">
         <h1>Retiring in:</h1>
-        <div class="timer" id="timer">Calculating...</div>
+        <div class="timer" id="timer">
+            <div id="days">
+                0
+                <div class="label">Days</div>
+            </div>
+            <div id="hours">
+                0
+                <div class="label">Hrs</div>
+            </div>
+            <div id="minutes">
+                0
+                <div class="label">Mins</div>
+            </div>
+            <div id="seconds">
+                0
+                <div class="label">Secs</div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -50,9 +108,12 @@
                 const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-                document.getElementById('timer').innerText = `${days} days ${hours} hrs ${minutes} mins ${seconds} secs`;
+                document.getElementById('days').firstChild.nodeValue = days;
+                document.getElementById('hours').firstChild.nodeValue = hours;
+                document.getElementById('minutes').firstChild.nodeValue = minutes;
+                document.getElementById('seconds').firstChild.nodeValue = seconds;
             } else {
-                document.getElementById('timer').innerText = 'The day has arrived!';
+                document.getElementById('timer').innerHTML = '<div>The day has arrived!</div>';
             }
         }
 
