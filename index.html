@@ -19,7 +19,6 @@
         .countdown {
             text-align: center;
             padding: 20px;
-            box-sizing: border-box;
         }
         h1 {
             font-size: 40px;
@@ -34,37 +33,29 @@
         .timer div {
             background: #222;
             color: #fff;
-            font-size: 36px; /* Specify font size in px */
+            font-size: 36px;
             font-weight: bold;
             border-radius: 10px;
             padding: 15px 10px;
             text-align: center;
             min-width: 100px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            flex: 1 1 calc(25% - 10px);
-            max-width: 150px;
             position: relative;
             overflow: hidden;
         }
         .label {
-            font-size: 14px; /* Specify font size in px */
+            font-size: 14px;
             color: #ddd;
             position: absolute;
             bottom: 5px;
             width: 100%;
             text-align: center;
         }
-
-        .image-container {
-            margin-bottom: 20px;
-        }
         .image-container img {
             max-width: 100%;
-            height: auto;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
-
         footer {
             margin-top: 20px;
             font-size: 14px;
@@ -81,31 +72,40 @@
         footer a:hover {
             text-decoration: underline;
         }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 32px;
-            }
-            .timer div {
-                font-size: 28px; /* Specify font size in px */
-                padding: 10px 8px;
-            }
-            .label {
-                font-size: 12px; /* Specify font size in px */
-            }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 24px;
-            }
-            .timer div {
-                font-size: 20px; /* Specify font size in px */
-                padding: 8px 5px;
-            }
-            .label {
-                font-size: 10px; /* Specify font size in px */
-            }
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        .modal-content h2 {
+            margin-top: 0;
+        }
+        .close-btn {
+            margin-top: 20px;
+            background: #FF4500;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            background: #FF9933;
         }
     </style>
 </head>
@@ -116,31 +116,18 @@
         </div>
         <h1>Retiring in:</h1>
         <div class="timer" id="timer">
-            <div id="days">
-                0
-                <div class="label">Days</div>
-            </div>
-            <div id="hours">
-                0
-                <div class="label">Hrs</div>
-            </div>
-            <div id="minutes">
-                0
-                <div class="label">Mins</div>
-            </div>
-            <div id="seconds">
-                0
-                <div class="label">Secs</div>
-            </div>
+            <div id="days">0<div class="label">Days</div></div>
+            <div id="hours">0<div class="label">Hrs</div></div>
+            <div id="minutes">0<div class="label">Mins</div></div>
+            <div id="seconds">0<div class="label">Secs</div></div>
         </div>
     </div>
-
     <footer>
         <a href="https://github.com/namoplans/retire" target="_blank">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white">
                 <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.744.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.47-2.38 1.235-3.22-.135-.304-.54-1.526.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.65.24 2.872.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.435.375.825 1.113.825 2.25 0 1.62-.015 2.92-.015 3.315 0 .315.21.69.825.575 4.765-1.59 8.2-6.084 8.2-11.385 0-6.627-5.373-12-12-12z"/>
             </svg>
-            Fork me on GitHub
+            Fork on GitHub
         </a>
         | 
         <a href="https://twitter.com/gounder" target="_blank">
@@ -149,15 +136,30 @@
             </svg>
             Follow me on X
         </a>
+        | 
+        <a href="#" onclick="openAbout()">About this site</a>
     </footer>
+
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <h2>About This Site</h2>
+            <p>
+                In 2013, I revived an <a href="https://timesofindia.indiatimes.com/tech-news/narendra-modi-spoof-site-resurrected-in-protest/articleshow/21440386.cms" target="_blank">abandoned spoof website</a> on the then PM candidate. 
+                At the time, it was a commentary on how the promises of acche din lacked concrete details or plans to transform the country.
+            </p>
+            <p>
+                In hindsight, it became clear that acche din plans existed—but not for the people they were promised to, rather for one master. 
+                This new version of the site marks his turning 75, with the hope that he retires, following the precedent he set
+                for other leaders aged 75 or above.
+            </p>
+            <button class="close-btn" onclick="closeAbout()">Close</button>
+        </div>
+    </div>
 
     <script>
         function updateCountdown() {
-            // Target date: 17 September 2025 00:00:00 IST
             const targetDate = new Date('2025-09-17T00:00:00+05:30').getTime();
             const now = new Date().getTime();
-
-            // Calculate the difference
             const timeDifference = targetDate - now;
 
             if (timeDifference > 0) {
@@ -166,18 +168,25 @@
                 const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-                document.getElementById('days').firstChild.nodeValue = days;
-                document.getElementById('hours').firstChild.nodeValue = hours;
-                document.getElementById('minutes').firstChild.nodeValue = minutes;
-                document.getElementById('seconds').firstChild.nodeValue = seconds;
+                document.getElementById('days').innerText = days;
+                document.getElementById('hours').innerText = hours;
+                document.getElementById('minutes').innerText = minutes;
+                document.getElementById('seconds').innerText = seconds;
             } else {
                 document.getElementById('timer').innerHTML = '<div>The day has arrived!</div>';
             }
         }
 
-        // Update countdown every second
+        function openAbout() {
+            document.getElementById('aboutModal').style.display = 'flex';
+        }
+
+        function closeAbout() {
+            document.getElementById('aboutModal').style.display = 'none';
+        }
+
         setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call
+        updateCountdown();
     </script>
 </body>
 </html>
